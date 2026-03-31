@@ -293,8 +293,9 @@ function Dashboard() {
   const [showGold, setShowGold] = useState(false);
 
   const stats = [
-    { icon: Users, value: "28", label: "客户", color: "brand" },
-    { icon: Inbox, value: "15", label: "线索", color: "lavender" },
+    { icon: Users, value: "28", label: "客户", sensitive: false },
+    { icon: Inbox, value: "15", label: "线索", sensitive: false },
+    { icon: Coins, value: "2,888", label: "金币", sensitive: true },
   ];
 
   return (
@@ -308,7 +309,8 @@ function Dashboard() {
           <div className="grid grid-cols-3 gap-3">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
-              const isBrand = stat.color === "brand";
+              const isSensitive = stat.sensitive;
+
               return (
                 <motion.div
                   key={stat.label}
@@ -318,14 +320,45 @@ function Dashboard() {
                   whileHover={{ scale: 1.02 }}
                   className="text-center"
                 >
-                  <motion.span
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.2 + index * 0.1 }}
-                    className={`text-3xl font-black ${isBrand ? "text-brand-600 dark:text-brand-400" : "text-lavender-600 dark:text-lavender-400"}`}
-                  >
-                    {stat.value}
-                  </motion.span>
+                  {isSensitive ? (
+                    <motion.button
+                      onClick={() => setShowGold(!showGold)}
+                      className="flex flex-col items-center justify-center cursor-pointer w-full"
+                    >
+                      <AnimatePresence mode="wait">
+                        {showGold ? (
+                          <motion.span
+                            key="visible"
+                            initial={{ opacity: 0, filter: "blur(4px)" }}
+                            animate={{ opacity: 1, filter: "blur(0px)" }}
+                            exit={{ opacity: 0, filter: "blur(4px)" }}
+                            className="text-3xl font-black bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent"
+                          >
+                            {stat.value}
+                          </motion.span>
+                        ) : (
+                          <motion.div
+                            key="hidden"
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            className="text-3xl font-black text-muted-foreground"
+                          >
+                            ***
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.button>
+                  ) : (
+                    <motion.span
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.2 + index * 0.1 }}
+                      className="text-3xl font-black text-foreground"
+                    >
+                      {stat.value}
+                    </motion.span>
+                  )}
                   <p className="text-xs text-muted-foreground font-medium mt-1 flex items-center justify-center gap-1">
                     <Icon className="w-3 h-3" />
                     {stat.label}
@@ -333,47 +366,6 @@ function Dashboard() {
                 </motion.div>
               );
             })}
-
-            {/* 金币数据 */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
-              whileHover={{ scale: 1.02 }}
-              className="text-center"
-            >
-              <motion.button
-                onClick={() => setShowGold(!showGold)}
-                className="flex flex-col items-center justify-center cursor-pointer w-full"
-              >
-                <AnimatePresence mode="wait">
-                  {showGold ? (
-                    <motion.span
-                      key="visible"
-                      initial={{ opacity: 0, filter: "blur(4px)" }}
-                      animate={{ opacity: 1, filter: "blur(0px)" }}
-                      exit={{ opacity: 0, filter: "blur(4px)" }}
-                      className="text-3xl font-black bg-gradient-to-r from-amber-500 to-amber-600 bg-clip-text text-transparent"
-                    >
-                      2,888
-                    </motion.span>
-                  ) : (
-                    <motion.div
-                      key="hidden"
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.8, opacity: 0 }}
-                    >
-                      <EyeOff className="w-8 h-8 text-muted-foreground" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
-              <p className="text-xs text-muted-foreground font-medium mt-1 flex items-center justify-center gap-1">
-                <Coins className="w-3 h-3 text-amber-500" />
-                金币
-              </p>
-            </motion.div>
           </div>
         </CardContent>
       </Card>
