@@ -11,13 +11,13 @@ import {
   Users,
   EnvelopeSimple,
   CoinVertical,
-  NewspaperClipping,
   CalendarBlank,
   ClipboardText,
-  Play,
   Eye,
-  Megaphone,
-  FileText,
+  Heart,
+  GraduationCap,
+  MapPin,
+  Star,
   Cake,
   Building,
   Shield,
@@ -341,34 +341,246 @@ function Dashboard() {
   );
 }
 
-// 展业工具组件
-function ToolsGrid() {
-  const tools = [
+// 资讯与活动中心组件
+function ContentHub() {
+  const [activeTab, setActiveTab] = useState("热点");
+  const tabs = ["热点", "活动", "评测"];
+
+  // 热点资讯数据
+  const hotTopics = [
     {
-      icon: NewspaperClipping,
-      label: "资讯",
-      gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)",
-      bgGradient: "linear-gradient(135deg, rgba(0,188,113,0.08) 0%, rgba(74,222,128,0.02) 100%)",
-    },
-    {
-      icon: CalendarBlank,
-      label: "活动",
+      title: "2026 年全球资产配置白皮书深度发布，保险配置策略全解析",
+      time: "10 分钟前",
+      views: "1.2k",
+      category: "投资理财",
       gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)",
-      bgGradient: "linear-gradient(135deg, rgba(255,143,107,0.08) 0%, rgba(255,176,154,0.02) 100%)",
     },
     {
-      icon: ClipboardText,
-      label: "评测",
+      title: "医疗健康产业趋势报告：商业保险迎来新机遇",
+      time: "30 分钟前",
+      views: "856",
+      category: "医疗健康",
+      gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)",
+    },
+    {
+      title: "养老金制度改革解读：第三支柱如何规划",
+      time: "1 小时前",
+      views: "623",
+      category: "养老规划",
       gradient: "linear-gradient(135deg, #5AB0FF 0%, #8AC9FF 100%)",
-      bgGradient: "linear-gradient(135deg, rgba(90,176,255,0.08) 0%, rgba(138,201,255,0.02) 100%)",
     },
     {
-      icon: Play,
-      label: "视频",
+      title: "子女教育金规划指南：保险配置的最佳时机",
+      time: "2 小时前",
+      views: "445",
+      category: "子女教育",
       gradient: "linear-gradient(135deg, #FFC85C 0%, #FFE082 100%)",
-      bgGradient: "linear-gradient(135deg, rgba(255,200,92,0.08) 0%, rgba(255,224,130,0.02) 100%)",
     },
   ];
+
+  // 活动数据
+  const events = [
+    {
+      title: "高净值客户沙龙：家族信托与财富传承",
+      date: "2026-04-15",
+      location: "上海·陆家嘴",
+      gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)",
+    },
+    {
+      title: "线上直播：重疾险产品对比分析会",
+      date: "2026-04-18",
+      location: "直播间",
+      gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)",
+    },
+    {
+      title: "客户答谢会：2026 保险趋势分享",
+      date: "2026-04-22",
+      location: "北京·国贸",
+      gradient: "linear-gradient(135deg, #5AB0FF 0%, #8AC9FF 100%)",
+    },
+  ];
+
+  // 评测数据
+  const reviews = [
+    {
+      title: "5 款热门重疾险横向对比测评",
+      rating: 4.8,
+      products: 5,
+      gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)",
+    },
+    {
+      title: "增额终身寿险收益排行榜 TOP10",
+      rating: 4.6,
+      products: 10,
+      gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)",
+    },
+    {
+      title: "百万医疗险性价比之王，竟然是它？",
+      rating: 4.9,
+      products: 8,
+      gradient: "linear-gradient(135deg, #FFC85C 0%, #FFE082 100%)",
+    },
+  ];
+
+  const renderContent = () => {
+    if (activeTab === "热点") {
+      return (
+        <div className="space-y-3">
+          {hotTopics.map((topic, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 + index * 0.08 }}
+              whileHover={{ x: 3 }}
+              className="flex gap-3 cursor-pointer group"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] px-2 py-0.5 rounded-md font-semibold text-white" style={{ background: topic.gradient, boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }}>
+                    {topic.category}
+                  </span>
+                </div>
+                <h3 className="text-base font-medium text-[#0F172A] line-clamp-2 group-hover:text-[#00BC71] transition-colors">
+                  {topic.title}
+                </h3>
+                <div className="flex items-center gap-3 mt-2 text-[10px] text-[#94a3b8]">
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5" weight="fill" />
+                    {topic.time}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Eye className="w-3.5 h-3.5" weight="fill" />
+                    {topic.views}
+                  </span>
+                </div>
+              </div>
+              <motion.div
+                whileHover={{ scale: 1.05, rotate: 2 }}
+                className="w-20 h-20 rounded-lg flex items-center justify-center"
+                style={{
+                  background: topic.gradient,
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+                }}
+              >
+                {topic.category === "投资理财" && <CoinVertical className="w-8 h-8 text-white" weight="fill" />}
+                {topic.category === "医疗健康" && <Heart className="w-8 h-8 text-white" weight="fill" />}
+                {topic.category === "养老规划" && <Users className="w-8 h-8 text-white" weight="fill" />}
+                {topic.category === "子女教育" && <GraduationCap className="w-8 h-8 text-white" weight="fill" />}
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
+      );
+    }
+
+    if (activeTab === "活动") {
+      return (
+        <div className="grid grid-cols-1 gap-3">
+          {events.map((event, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + index * 0.08 }}
+              whileHover={{ y: -2, scale: 1.01 }}
+              className="relative overflow-hidden rounded-xl p-4"
+              style={{
+                background: `linear-gradient(135deg, rgba(0,188,113,0.05) 0%, rgba(74,222,128,0.02) 100%)`,
+                boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
+              }}
+            >
+              <div className="flex gap-4">
+                <motion.div
+                  className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background: event.gradient,
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+                  }}
+                >
+                  <CalendarBlank className="w-8 h-8 text-white" weight="fill" />
+                </motion.div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base font-medium text-[#0F172A] line-clamp-2">
+                    {event.title}
+                  </h3>
+                  <div className="flex items-center gap-3 mt-2 text-[10px] text-[#94a3b8]">
+                    <span className="flex items-center gap-1">
+                      <CalendarBlank className="w-3.5 h-3.5" weight="fill" />
+                      {event.date}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <MapPin className="w-3.5 h-3.5" weight="fill" />
+                      {event.location}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      );
+    }
+
+    if (activeTab === "评测") {
+      return (
+        <div className="grid grid-cols-1 gap-3">
+          {reviews.map((review, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 + index * 0.08 }}
+              whileHover={{ y: -2, scale: 1.01 }}
+              className="relative overflow-hidden rounded-xl p-4"
+              style={{
+                background: `linear-gradient(135deg, rgba(0,188,113,0.05) 0%, rgba(74,222,128,0.02) 100%)`,
+                boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
+              }}
+            >
+              <div className="flex gap-4">
+                <motion.div
+                  className="w-16 h-16 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{
+                    background: review.gradient,
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+                  }}
+                >
+                  <ClipboardText className="w-8 h-8 text-white" weight="fill" />
+                </motion.div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base font-medium text-[#0F172A] line-clamp-2">
+                    {review.title}
+                  </h3>
+                  <div className="flex items-center gap-3 mt-2">
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-3.5 h-3.5 ${
+                            i < Math.floor(review.rating)
+                              ? "text-[#FFC85C]"
+                              : "text-[#E2E8F0]"
+                          }`}
+                          weight="fill"
+                        />
+                      ))}
+                      <span className="text-[10px] font-medium text-[#0F172A] ml-1">
+                        {review.rating}
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-[#94a3b8]">
+                      对比 {review.products} 款产品
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      );
+    }
+  };
 
   return (
     <motion.div
@@ -379,7 +591,7 @@ function ToolsGrid() {
       <Card className="bg-white shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
         <CardContent className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-base font-semibold text-[#0F172A]">展业工具</span>
+            <span className="text-base font-semibold text-[#0F172A]">资讯中心</span>
             <motion.button
               whileHover={{ x: 4 }}
               className="text-xs font-medium text-[#00BC71] flex items-center gap-1"
@@ -388,137 +600,37 @@ function ToolsGrid() {
             </motion.button>
           </div>
 
-          <div className="grid grid-cols-4 gap-3">
-            {tools.map((tool, index) => {
-              const Icon = tool.icon;
-
-              return (
-                <motion.div
-                  key={tool.label}
-                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ delay: 0.4 + index * 0.08 }}
-                  whileHover={{ y: -4, scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="cursor-pointer"
-                >
-                  <div
-                    className="relative p-4 rounded-xl shadow-[0_8px_24px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-[0_12px_40px_rgba(0,0,0,0.1)] overflow-hidden"
-                    style={{ background: tool.bgGradient }}
-                  >
-                    <div className="text-center">
-                      <motion.div
-                        whileHover={{ scale: 1.15, rotate: 5 }}
-                        className="w-12 h-12 mx-auto mb-2.5 rounded-lg flex items-center justify-center transition-all duration-300"
-                        style={{
-                          background: tool.gradient,
-                          boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
-                        }}
-                      >
-                        <Icon className="w-6 h-6 text-white" weight="fill" />
-                      </motion.div>
-                      <p className="text-xs font-semibold text-[#0F172A]">
-                        {tool.label}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </CardContent>
-      </Card>
-    </motion.div>
-  );
-}
-
-// 今日热点组件
-function HotTopics() {
-  const topics = [
-    {
-      title: "2026 年全球资产配置白皮书深度发布，保险配置策略全解析",
-      time: "10 分钟前",
-      views: "1.2k",
-      tag: "热门",
-      gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)",
-    },
-    {
-      title: "聚流精英代理人：邀好友体验，赢大礼，最高可得 888 金币",
-      time: "1 小时前",
-      views: "856",
-      tag: "活动",
-      gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)",
-    },
-    {
-      title: "终身寿险 vs 重疾险：如何为客户选择最适合的保障方案？",
-      time: "2 小时前",
-      views: "623",
-      tag: "干货",
-      gradient: "linear-gradient(135deg, #5AB0FF 0%, #8AC9FF 100%)",
-    },
-  ];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: 0.4 }}
-    >
-      <Card className="bg-white shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
-        <CardContent className="p-5">
-          <div className="flex items-center justify-between mb-4">
-            <span className="text-base font-semibold text-[#0F172A]">今日热点</span>
-          </div>
-
-          {/* 内容列表 */}
-          <div className="space-y-3">
-            {topics.map((topic, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 + index * 0.1 }}
-                whileHover={{ x: 3 }}
-                className="flex gap-3 cursor-pointer group"
+          {/* Tab 切换 */}
+          <div className="flex gap-1 mb-4 p-1 bg-[#F1F5F9] rounded-xl">
+            {tabs.map((tab) => (
+              <motion.button
+                key={tab}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => setActiveTab(tab)}
+                className={`flex-1 py-2 text-xs font-medium rounded-lg transition-all ${
+                  activeTab === tab
+                    ? "bg-white text-[#0F172A] shadow-sm"
+                    : "text-[#94a3b8] hover:text-[#0F172A]"
+                }`}
               >
-                {/* 内容区 */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[10px] px-2 py-0.5 rounded-md font-semibold text-white" style={{ background: topic.gradient, boxShadow: "0 2px 8px rgba(0,0,0,0.15)" }}>
-                      {topic.tag}
-                    </span>
-                  </div>
-                  <h3 className="text-base font-medium text-[#0F172A] line-clamp-2 group-hover:text-[#00BC71] transition-colors">
-                    {topic.title}
-                  </h3>
-                  <div className="flex items-center gap-3 mt-2 text-[10px] text-[#94a3b8]">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" weight="fill" />
-                      {topic.time}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Eye className="w-3.5 h-3.5" weight="fill" />
-                      {topic.views}
-                    </span>
-                  </div>
-                </div>
-
-                {/* 图片区 */}
-                <motion.div
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  className="w-20 h-20 rounded-lg flex items-center justify-center"
-                  style={{
-                    background: topic.gradient,
-                    boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
-                  }}
-                >
-                  {topic.tag === "热门" && <Megaphone className="w-8 h-8 text-white" weight="fill" />}
-                  {topic.tag === "活动" && <Sparkle className="w-8 h-8 text-white" weight="fill" />}
-                  {topic.tag === "干货" && <FileText className="w-8 h-8 text-white" weight="fill" />}
-                </motion.div>
-              </motion.div>
+                {tab}
+              </motion.button>
             ))}
           </div>
+
+          {/* 内容区 */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              {renderContent()}
+            </motion.div>
+          </AnimatePresence>
         </CardContent>
       </Card>
     </motion.div>
@@ -662,8 +774,7 @@ export default function Home() {
           <div className="space-y-4">
             <LeadsCarousel />
             <Dashboard />
-            <ToolsGrid />
-            <HotTopics />
+            <ContentHub />
           </div>
         </div>
 
