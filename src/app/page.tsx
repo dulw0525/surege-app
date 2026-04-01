@@ -14,8 +14,6 @@ import {
   CalendarBlank,
   ClipboardText,
   Eye,
-  Heart,
-  GraduationCap,
   MapPin,
   Star,
   Cake,
@@ -341,7 +339,7 @@ function Dashboard() {
   );
 }
 
-// 资讯与活动中心组件
+// 展业工具组件
 function ContentHub() {
   const [activeTab, setActiveTab] = useState("热点");
   const tabs = ["热点", "活动", "评测"];
@@ -354,6 +352,10 @@ function ContentHub() {
       views: "1.2k",
       category: "投资理财",
       gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)",
+      thumbnail: {
+        bg: "linear-gradient(135deg, rgba(255,143,107,0.1) 0%, rgba(255,176,154,0.05) 100%)",
+        lines: 3,
+      },
     },
     {
       title: "医疗健康产业趋势报告：商业保险迎来新机遇",
@@ -361,6 +363,10 @@ function ContentHub() {
       views: "856",
       category: "医疗健康",
       gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)",
+      thumbnail: {
+        bg: "linear-gradient(135deg, rgba(0,188,113,0.1) 0%, rgba(74,222,128,0.05) 100%)",
+        lines: 3,
+      },
     },
     {
       title: "养老金制度改革解读：第三支柱如何规划",
@@ -368,6 +374,10 @@ function ContentHub() {
       views: "623",
       category: "养老规划",
       gradient: "linear-gradient(135deg, #5AB0FF 0%, #8AC9FF 100%)",
+      thumbnail: {
+        bg: "linear-gradient(135deg, rgba(90,176,255,0.1) 0%, rgba(138,201,255,0.05) 100%)",
+        lines: 4,
+      },
     },
     {
       title: "子女教育金规划指南：保险配置的最佳时机",
@@ -375,6 +385,10 @@ function ContentHub() {
       views: "445",
       category: "子女教育",
       gradient: "linear-gradient(135deg, #FFC85C 0%, #FFE082 100%)",
+      thumbnail: {
+        bg: "linear-gradient(135deg, rgba(255,200,92,0.1) 0%, rgba(255,224,130,0.05) 100%)",
+        lines: 3,
+      },
     },
   ];
 
@@ -455,18 +469,27 @@ function ContentHub() {
                   </span>
                 </div>
               </div>
+              {/* 文章缩略图模拟 */}
               <motion.div
                 whileHover={{ scale: 1.05, rotate: 2 }}
-                className="w-20 h-20 rounded-lg flex items-center justify-center"
+                className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0"
                 style={{
-                  background: topic.gradient,
-                  boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+                  background: topic.thumbnail.bg,
+                  boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
                 }}
               >
-                {topic.category === "投资理财" && <CoinVertical className="w-8 h-8 text-white" weight="fill" />}
-                {topic.category === "医疗健康" && <Heart className="w-8 h-8 text-white" weight="fill" />}
-                {topic.category === "养老规划" && <Users className="w-8 h-8 text-white" weight="fill" />}
-                {topic.category === "子女教育" && <GraduationCap className="w-8 h-8 text-white" weight="fill" />}
+                <div className="w-full h-full p-2 flex flex-col justify-center gap-1">
+                  {/* 模拟标题线 */}
+                  <div className="h-1.5 rounded-full bg-[#0F172A]/60 w-full" />
+                  {/* 模拟内容行 */}
+                  {[...Array(topic.thumbnail.lines)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="h-1 rounded-full bg-[#94a3b8]/40"
+                      style={{ width: `${100 - i * 8}%` }}
+                    />
+                  ))}
+                </div>
               </motion.div>
             </motion.div>
           ))}
@@ -591,7 +614,7 @@ function ContentHub() {
       <Card className="bg-white shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
         <CardContent className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-base font-semibold text-[#0F172A]">资讯中心</span>
+            <span className="text-base font-semibold text-[#0F172A]">展业工具</span>
             <motion.button
               whileHover={{ x: 4 }}
               className="text-xs font-medium text-[#00BC71] flex items-center gap-1"
