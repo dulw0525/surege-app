@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  Sun,
   MagnifyingGlass,
   Bell,
   CaretRight,
@@ -17,7 +16,6 @@ import {
   ClipboardText,
   Play,
   Eye,
-  EyeSlash,
   Megaphone,
   FileText,
   Cake,
@@ -48,7 +46,7 @@ function StatusBar() {
   );
 
   return (
-    <div className="flex justify-between items-center px-1 py-2 text-xs font-medium text-muted-foreground">
+    <div className="flex justify-between items-center px-1 py-2 text-xs font-medium text-[#94a3b8]">
       <span>9:41</span>
       <div className="flex items-center gap-1.5">
         <span>5G</span>
@@ -59,7 +57,7 @@ function StatusBar() {
   );
 }
 
-// 顶部 Header 组件 - 微立体毛玻璃风格
+// 顶部 Header 组件
 function Header() {
   return (
     <motion.div
@@ -110,7 +108,7 @@ function Header() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="w-10 h-10 rounded-xl bg-white flex items-center justify-center transition-colors border border-[#E2E8F0] shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
+            className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
           >
             <MagnifyingGlass className="w-5 h-5 text-[#0F172A]" weight="bold" />
           </motion.button>
@@ -119,7 +117,7 @@ function Header() {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="relative w-10 h-10 rounded-xl bg-white flex items-center justify-center transition-colors border border-[#E2E8F0] shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
+            className="relative w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-[0_4px_16px_rgba(0,0,0,0.08)]"
           >
             <Bell className="w-5 h-5 text-[#0F172A]" weight="fill" />
             <motion.div
@@ -135,7 +133,7 @@ function Header() {
   );
 }
 
-// 线索轮播组件 - 微立体毛玻璃风格
+// 线索轮播组件
 function LeadsCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -143,28 +141,28 @@ function LeadsCarousel() {
     {
       title: "张** 分享了 1 条新线索",
       tags: [
-        { icon: Cake, label: "32 岁", gradient: "linear-gradient(135deg, #5AB0FF 0%, #8AC9FF 100%)", shadow: "shadow-glow-blue" },
-        { icon: Building, label: "互联网", gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)", shadow: "shadow-glow-green" },
-        { icon: Shield, label: "终身寿", gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)", shadow: "shadow-glow-orange" },
-        { icon: CoinVertical, label: "50W+", gradient: "linear-gradient(135deg, #FFC85C 0%, #FFE082 100%)", shadow: "shadow-glow-yellow" },
+        { icon: Cake, label: "32 岁" },
+        { icon: Building, label: "互联网" },
+        { icon: Shield, label: "终身寿" },
+        { icon: CoinVertical, label: "50W+" },
       ],
     },
     {
       title: "李** 分享了 1 条新线索",
       tags: [
-        { icon: Cake, label: "28 岁", gradient: "linear-gradient(135deg, #5AB0FF 0%, #8AC9FF 100%)", shadow: "shadow-glow-blue" },
-        { icon: Building, label: "金融", gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)", shadow: "shadow-glow-green" },
-        { icon: Shield, label: "重疾险", gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)", shadow: "shadow-glow-orange" },
-        { icon: CoinVertical, label: "30W+", gradient: "linear-gradient(135deg, #FFC85C 0%, #FFE082 100%)", shadow: "shadow-glow-yellow" },
+        { icon: Cake, label: "28 岁" },
+        { icon: Building, label: "金融" },
+        { icon: Shield, label: "重疾险" },
+        { icon: CoinVertical, label: "30W+" },
       ],
     },
     {
       title: "王** 分享了 1 条新线索",
       tags: [
-        { icon: Cake, label: "35 岁", gradient: "linear-gradient(135deg, #5AB0FF 0%, #8AC9FF 100%)", shadow: "shadow-glow-blue" },
-        { icon: Building, label: "科技", gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)", shadow: "shadow-glow-green" },
-        { icon: Shield, label: "医疗险", gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)", shadow: "shadow-glow-orange" },
-        { icon: CoinVertical, label: "80W+", gradient: "linear-gradient(135deg, #FFC85C 0%, #FFE082 100%)", shadow: "shadow-glow-yellow" },
+        { icon: Cake, label: "35 岁" },
+        { icon: Building, label: "科技" },
+        { icon: Shield, label: "医疗险" },
+        { icon: CoinVertical, label: "80W+" },
       ],
     },
   ];
@@ -182,9 +180,9 @@ function LeadsCarousel() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
     >
-      <Card className="overflow-hidden bg-gradient-to-br from-[#00BC71] via-[#00A862] to-[#008F56] border-0 shadow-[0_8px_32px_rgba(0,188,113,0.25)]">
+      <Card className="overflow-hidden bg-gradient-to-br from-[#00BC71] via-[#00A862] to-[#008F56] shadow-[0_8px_32px_rgba(0,188,113,0.25)]">
         <CardContent className="p-5 text-white">
-          {/* 标题栏 - 毛玻璃悬浮窗效果 */}
+          {/* 标题栏 */}
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <div className="w-1 h-5 rounded-full bg-white/90" style={{ boxShadow: "0 0 12px rgba(255,255,255,0.6)" }} />
@@ -211,7 +209,7 @@ function LeadsCarousel() {
                 {leads[currentIndex].title}
               </p>
 
-              {/* 标签 Grid - 白色半透明毛玻璃风格 */}
+              {/* 标签 Grid */}
               <div className="grid grid-cols-4 gap-2">
                 {leads[currentIndex].tags.map((tag, index) => {
                   const TagIcon = tag.icon;
@@ -256,7 +254,7 @@ function LeadsCarousel() {
   );
 }
 
-// 数据看板组件 - 薄荷清新风格
+// 数据看板组件
 function Dashboard() {
   const [showGold, setShowGold] = useState(false);
 
@@ -310,7 +308,7 @@ function Dashboard() {
                             initial={{ scale: 0.9, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.9, opacity: 0 }}
-                            className="text-3xl font-bold text-muted-foreground"
+                            className="text-3xl font-bold text-[#94a3b8]"
                           >
                             ***
                           </motion.div>
@@ -328,8 +326,8 @@ function Dashboard() {
                     </motion.span>
                   )}
                   <div className="flex items-center justify-center gap-2 mt-2">
-                    <Icon className="w-5 h-5 text-[#64748b]" weight="fill" />
-                    <p className="text-xs font-medium text-[#64748b]">
+                    <Icon className="w-5 h-5 text-[#94a3b8]" weight="fill" />
+                    <p className="text-xs font-medium text-[#94a3b8]">
                       {stat.label}
                     </p>
                   </div>
@@ -343,7 +341,7 @@ function Dashboard() {
   );
 }
 
-// 展业工具组件 - 微立体渐变风格
+// 展业工具组件
 function ToolsGrid() {
   const tools = [
     {
@@ -378,13 +376,13 @@ function ToolsGrid() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.3 }}
     >
-      <Card className="bg-white dark:bg-card shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+      <Card className="bg-white shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
         <CardContent className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-base font-semibold text-foreground">展业工具</span>
+            <span className="text-base font-semibold text-[#0F172A]">展业工具</span>
             <motion.button
               whileHover={{ x: 4 }}
-              className="text-xs font-medium text-brand-600 dark:text-brand-400 flex items-center gap-1"
+              className="text-xs font-medium text-[#00BC71] flex items-center gap-1"
             >
               查看全部 <CaretRight className="w-4 h-4" weight="bold" />
             </motion.button>
@@ -434,14 +432,13 @@ function ToolsGrid() {
   );
 }
 
-// 今日热点组件 - 薄荷清新风格
+// 今日热点组件
 function HotTopics() {
   const topics = [
     {
       title: "2026 年全球资产配置白皮书深度发布，保险配置策略全解析",
       time: "10 分钟前",
       views: "1.2k",
-      icon: Eye,
       tag: "热门",
       gradient: "linear-gradient(135deg, #FF8F6B 0%, #FFB09A 100%)",
     },
@@ -449,7 +446,6 @@ function HotTopics() {
       title: "聚流精英代理人：邀好友体验，赢大礼，最高可得 888 金币",
       time: "1 小时前",
       views: "856",
-      icon: Megaphone,
       tag: "活动",
       gradient: "linear-gradient(135deg, #00BC71 0%, #4ADE80 100%)",
     },
@@ -457,7 +453,6 @@ function HotTopics() {
       title: "终身寿险 vs 重疾险：如何为客户选择最适合的保障方案？",
       time: "2 小时前",
       views: "623",
-      icon: FileText,
       tag: "干货",
       gradient: "linear-gradient(135deg, #5AB0FF 0%, #8AC9FF 100%)",
     },
@@ -469,10 +464,10 @@ function HotTopics() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
     >
-      <Card className="bg-white dark:bg-card shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
+      <Card className="bg-white shadow-[0_8px_32px_rgba(0,0,0,0.08)]">
         <CardContent className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-base font-semibold text-foreground">今日热点</span>
+            <span className="text-base font-semibold text-[#0F172A]">今日热点</span>
           </div>
 
           {/* 内容列表 */}
@@ -496,7 +491,7 @@ function HotTopics() {
                   <h3 className="text-base font-medium text-[#0F172A] line-clamp-2 group-hover:text-[#00BC71] transition-colors">
                     {topic.title}
                   </h3>
-                  <div className="flex items-center gap-3 mt-2 text-[10px] text-[#64748b]">
+                  <div className="flex items-center gap-3 mt-2 text-[10px] text-[#94a3b8]">
                     <span className="flex items-center gap-1">
                       <Clock className="w-3.5 h-3.5" weight="fill" />
                       {topic.time}
@@ -508,7 +503,7 @@ function HotTopics() {
                   </div>
                 </div>
 
-                {/* 图片区 - 微立体风格 */}
+                {/* 图片区 */}
                 <motion.div
                   whileHover={{ scale: 1.05, rotate: 2 }}
                   className="w-20 h-20 rounded-lg flex items-center justify-center"
@@ -517,7 +512,9 @@ function HotTopics() {
                     boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
                   }}
                 >
-                  <topic.icon className="w-8 h-8 text-white" weight="fill" />
+                  {topic.tag === "热门" && <Megaphone className="w-8 h-8 text-white" weight="fill" />}
+                  {topic.tag === "活动" && <Sparkle className="w-8 h-8 text-white" weight="fill" />}
+                  {topic.tag === "干货" && <FileText className="w-8 h-8 text-white" weight="fill" />}
                 </motion.div>
               </motion.div>
             ))}
@@ -528,7 +525,7 @@ function HotTopics() {
   );
 }
 
-// 底部导航组件 - 薄荷清新风格
+// 底部导航组件
 function BottomNav() {
   const navItems = [
     { icon: House, label: "首页", active: true },
@@ -541,14 +538,14 @@ function BottomNav() {
   return (
     <>
       {/* 背景遮罩 */}
-      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-[#F6F9F8] to-transparent pointer-events-none" />
 
       {/* 导航栏 */}
       <motion.nav
         initial={{ y: 100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, delay: 0.5 }}
-        className="absolute bottom-0 left-0 w-full bg-white/90 dark:bg-card/90 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_-4px_24px_rgba(0,0,0,0.2)] px-2 py-2.5 z-50"
+        className="absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.08)] px-2 py-2.5 z-50"
       >
         <div className="flex justify-around items-end">
           {navItems.map((item, index) => {
@@ -605,7 +602,7 @@ function BottomNav() {
                 className={`flex flex-col items-center gap-1.5 p-2 rounded-lg transition-all duration-300 relative ${
                   item.active
                     ? "text-[#00BC71]"
-                    : "text-[#64748b] hover:text-[#0F172A]"
+                    : "text-[#94a3b8] hover:text-[#0F172A]"
                 }`}
               >
                 {Icon && (
@@ -634,7 +631,7 @@ function BottomNav() {
   );
 }
 
-// 背景装饰组件 - 微立体毛玻璃风格
+// 背景装饰组件
 function BackgroundDecorations() {
   return (
     <>
